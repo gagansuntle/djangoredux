@@ -31,11 +31,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Django Redux</a>
+          <a class="navbar-brand" href="{% url 'register:home' %}">Django Redux</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="{% url 'register:home' %}">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
             <li class="dropdown">
@@ -52,13 +52,20 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Default</a></li>
-            <li class="active"><a href="">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Fixed top</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+              {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+            <li><a href="{% url 'registration_register' %}">Register</a> </li>
+              {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+
+{% block name="jumb" %}
+ {% endblock %}
 
  <div class="container">
 
